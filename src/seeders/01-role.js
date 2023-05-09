@@ -15,6 +15,7 @@ const roles = [
   },
 ];
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   roles,
   async up(queryInterface, Sequelize) {

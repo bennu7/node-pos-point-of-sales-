@@ -5,11 +5,11 @@ import { IUserRegister, IUserUpdate } from "./user.dto";
 import { HttpExceptionBadRequest, HttpExceptionNotFound } from "@/exceptions/HttpException";
 import Role from "@/models/role.model";
 
-const USER_ID = "1e45853f-5603-43a3-8492-e74576ff2794";
+import { USER_ROLE } from "@/utils/constant.utils";
 
 class UserService {
-    public registerSvc = async (id: string | undefined, user: IUserRegister): Promise<User> => {
-        const { email, full_name, password, confirmation_password, user_name } = user;
+    public registerSvc = async (idAdmin: string | undefined, user: IUserRegister): Promise<User> => {
+        const { email, full_name, password, user_name, role_id, confirmation_password } = user;
 
         const chekEmail = await User.findOne({
             where: {
@@ -29,8 +29,8 @@ class UserService {
             full_name,
             password: passwordHash,
             user_name,
-            role_id: USER_ID,
-            created_by: id,
+            role_id: role_id ?? USER_ROLE,
+            created_by: idAdmin,
         });
 
         return created;

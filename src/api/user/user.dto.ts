@@ -5,20 +5,23 @@ import {
     IsNotEmpty,
     IsOptional,
     IsUUID,
+    Matches,
 } from "class-validator";
 
 export interface IUserRegister {
     email: string;
     full_name: string;
     user_name?: string;
+    role_id?: string;
     confirmation_password?: string;
     password?: string;
 }
 
 export interface IUserUpdate {
-    email: string;
-    full_name: string;
+    email?: string;
+    full_name?: string;
     user_name?: string;
+    role_id?: string;
     confirmation_password?: string;
     password?: string;
 }
@@ -33,10 +36,15 @@ export class RegisterUserDTO {
     @IsEmail() @IsNotEmpty()
     public email: string;
 
-    @IsString() @IsOptional() @IsStrongPassword()
+    @IsOptional() @IsUUID()
+    public role_id: string;
+
+    @IsString() @IsOptional()
+    @IsStrongPassword({ minLength: 6, minNumbers: 1, minUppercase: 1, minSymbols: 0, minLowercase: 0 })
     public password: string;
 
     @IsString() @IsOptional()
+    @IsStrongPassword({ minLength: 6, minNumbers: 1, minUppercase: 1, minSymbols: 0, minLowercase: 0 })
     public confirmation_password: string;
 }
 
@@ -50,7 +58,11 @@ export class UpdateUserDTO {
     @IsEmail() @IsOptional()
     public email: string;
 
+    @IsEmail() @IsOptional()
+    public role_id: string;
+
     @IsString() @IsOptional()
+    @IsStrongPassword({ minLength: 6, minNumbers: 1, minUppercase: 1, minSymbols: 0, minLowercase: 0 })
     public password: string;
 }
 

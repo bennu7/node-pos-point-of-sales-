@@ -14,8 +14,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "users",
           key: "id",
@@ -23,8 +22,7 @@ module.exports = {
       },
       payment_type_id: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "payment_types",
           key: "id",
@@ -32,23 +30,23 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       total_price: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       total_paid: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       total_return: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       receipt_code: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

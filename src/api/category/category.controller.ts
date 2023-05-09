@@ -24,7 +24,6 @@ class CategoryController {
 
     public createCategories = expressAsyncHandler(async (req: Request, res: Response) => {
         const { names } = req.body as ICreateCategories;
-        console.log("names => ", names);
         // const data = names.map((item) => {
         //     return {
         //         name: item
@@ -49,8 +48,9 @@ class CategoryController {
         const { ids } = req.body as IDeleteCategories;
 
         const deleted = await this.categoryService.deleteCategories(ids);
+        const { categoryDeleted, productDeleted } = deleted;
 
-        res.status(STATUS.OK).json(apiResponse(STATUS.OK, `Success delete ${deleted} category`));
+        res.status(STATUS.OK).json(apiResponse(STATUS.OK, `Success delete ${categoryDeleted} category and ${productDeleted} product`));
     });
 }
 

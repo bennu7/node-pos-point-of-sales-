@@ -1,7 +1,7 @@
 import { apiResponse } from '@/utils/apiResponse.utils';
+import TRANSACTION from '@/utils/transaction.utils';
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes as STATUS } from "http-status-codes";
-import { json } from 'sequelize';
 interface IError {
     code: number;
     status: string;
@@ -24,6 +24,10 @@ const errorMiddleware = async (
     try {
         console.log("🪓🪓  ERROR.PARENT ->", err.parent + " <- 🪓🪓");
         console.log("😡😡 error :", err);
+
+        // initialize rollback transaction
+        const t = await TRANSACTION();
+        t.rollback();
 
         // Sequelize error handler
         if (err?.parent?.code) {
@@ -59,6 +63,12 @@ const errorMiddleware = async (
                     return res
                         .status(STATUS.UNAUTHORIZED)
                         .json(apiResponse(STATUS.UNAUTHORIZED, "UNAUTHORIZED", message));
+                }
+                case "SequelizeForeignKeyConstraintError": {
+                    const message = err.name || "invalid foreign key";
+                    return res.
+                        status(STATUS.BAD_REQUEST).
+                        json(apiResponse(STATUS.BAD_REQUEST, "BAD_REQUEST", message));
                 }
             }
 

@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 import { JWT_SECRET_KEY } from "./constant.utils";
 
 export interface ITokenPayload {

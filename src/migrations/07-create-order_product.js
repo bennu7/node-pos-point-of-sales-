@@ -30,6 +30,14 @@ module.exports = {
           key: "id",
         },
       },
+      qty: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      total_price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("NOW()"),

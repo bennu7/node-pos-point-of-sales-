@@ -29,6 +29,31 @@ class ProductController {
 
         res.status(STATUS.CREATED).json(apiResponse(STATUS.CREATED, "Success create product", created));
     });
+
+    public updateProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const data = req.body as ICreateProduct;
+
+        const updated = await this.productService.updateProduct(id, data);
+
+        res.status(STATUS.OK).json(apiResponse(STATUS.OK, "Success update product", updated));
+    });
+
+    public deleteProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+        const { id } = req.params;
+
+        const deleted = await this.productService.deleteProduct(id);
+
+        res.status(STATUS.OK).json(apiResponse(STATUS.OK, `Success delete ${deleted} product`));
+    });
+
+    public deletesProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+        const { ids } = req.body;
+
+        const deleted = await this.productService.deleteMultipleProduct(ids);
+
+        res.status(STATUS.OK).json(apiResponse(STATUS.OK, `Success delete ${deleted} product`));
+    });
 }
 
 export default ProductController;

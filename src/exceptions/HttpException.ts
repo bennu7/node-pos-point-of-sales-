@@ -1,3 +1,5 @@
+import { StatusCodes as STATUS } from "http-status-codes";
+
 export class HttpException extends Error {
     public code: number;
     public status: string;
@@ -16,7 +18,7 @@ export class HttpException extends Error {
  */
 export class HttpExceptionBadRequest extends HttpException {
     constructor(message: string) {
-        super(400, "BAD_REQUEST", message);
+        super(STATUS.BAD_REQUEST, "BAD_REQUEST", message);
     }
 }
 /**
@@ -24,7 +26,7 @@ export class HttpExceptionBadRequest extends HttpException {
  */
 export class HttpExceptionUnauthorize extends HttpException {
     constructor(message: string) {
-        super(401, "UNAUTHORIZED", message);
+        super(STATUS.UNAUTHORIZED, "UNAUTHORIZED", message);
     }
 }
 
@@ -33,7 +35,7 @@ export class HttpExceptionUnauthorize extends HttpException {
  */
 export class HttpExceptionNotFound extends HttpException {
     constructor(message: string) {
-        super(404, "NOT_FOUND", message);
+        super(STATUS.NOT_FOUND, "NOT_FOUND", message);
     }
 }
 
@@ -42,7 +44,16 @@ export class HttpExceptionNotFound extends HttpException {
  */
 export class HttpExceptionTooManyRequests extends HttpException {
     constructor(message: string) {
-        super(429, "TOO_MANY_REQUEST", message);
+        super(STATUS.TOO_MANY_REQUESTS, "TOO_MANY_REQUEST", message);
+    }
+}
+
+/**
+ * Returns a response with status code 406.
+ */
+export class HttpExceptionNotAcceptable extends HttpException {
+    constructor(message: string) {
+        super(STATUS.NOT_ACCEPTABLE, "NOT_ACCEPTABLE", message);
     }
 }
 
@@ -51,7 +62,7 @@ export class HttpExceptionTooManyRequests extends HttpException {
  */
 export class HttpExceptionForbidden extends HttpException {
     constructor(message: string) {
-        super(403, "FORBIDDEN", message);
+        super(STATUS.FORBIDDEN, "FORBIDDEN", message);
     }
 }
 
@@ -60,6 +71,6 @@ export class HttpExceptionForbidden extends HttpException {
  */
 export class HttpExceptionValidationError extends HttpException {
     constructor(message: string) {
-        super(422, "UNPROCESSABLE_ENTITY", message);
+        super(STATUS.UNPROCESSABLE_ENTITY, "UNPROCESSABLE_ENTITY", message);
     }
 }

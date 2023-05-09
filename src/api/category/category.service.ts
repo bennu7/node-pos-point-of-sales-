@@ -1,9 +1,21 @@
 import { HttpExceptionNotFound } from "@/exceptions/HttpException";
 import Category from "@/models/category.model";
+import Product from "@/models/product.model";
+import TRANSACTION from "@/utils/transaction.utils";
+
+interface IResponseDeleteCategories {
+    categoryDeleted?: number;
+    productDeleted?: number;
+}
 
 class CategoryService {
     public async findAllCategories(): Promise<Category[]> {
-        const categories = await Category.findAll();
+        const categories = await Category.findAll({
+            include: {
+                model: Product,
+                as: "products"
+            }
+        });
         return categories;
     }
 
@@ -33,16 +45,29 @@ class CategoryService {
         return data;
     }
 
-    public async deleteCategories(id: string[]): Promise<number> {
-        console.log("id services => ", id);
-        const deleted = await Category.destroy({
+    public async deleteCategories(id: string[]): Promise<IResponseDeleteCategories> {
+        const t = await TRANSACTION();
+
+        const productDeleted = await Product.destroy({
             where: {
-                id
-            }
+                category_id: id
+            },
+            transaction: t
         });
 
-        if (deleted === 0) throw new HttpExceptionNotFound("Data category not found");
-        return deleted;
+        const categoryDeleted = await Category.destroy({
+            where: {
+                id: id
+            },
+            transaction: t
+        });
+
+        if (categoryDeleted === 0) throw new HttpExceptionNotFound("Data category not found");
+        t.commit();
+        return {
+            categoryDeleted,
+            productDeleted
+        };
     }
 }
 

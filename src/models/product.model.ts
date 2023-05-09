@@ -23,19 +23,19 @@ Product.init({
     },
     name: {
         type: new DataTypes.STRING(),
-        allowNull: false,
+        allowNull: true,
     },
     sku: {
         type: new DataTypes.STRING(),
-        allowNull: false,
+        allowNull: true,
     },
     stock: {
         type: new DataTypes.NUMBER(),
-        allowNull: false,
+        allowNull: true,
     },
     price: {
         type: new DataTypes.NUMBER(),
-        allowNull: false,
+        allowNull: true,
     },
     image: {
         type: new DataTypes.STRING(),
@@ -47,7 +47,7 @@ Product.init({
     },
     category_id: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
     }
 }, {
     tableName: "products",

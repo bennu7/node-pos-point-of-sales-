@@ -34,6 +34,7 @@ const categories = [
   },
 ];
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   categories,
   async up(queryInterface, Sequelize) {

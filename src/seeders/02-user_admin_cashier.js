@@ -12,6 +12,7 @@ const users = [
   },
 ];
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   users,
   async up(queryInterface, Sequelize) {

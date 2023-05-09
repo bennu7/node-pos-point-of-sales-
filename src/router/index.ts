@@ -4,6 +4,8 @@ import AuthRoute from "@/api/auth/auth.route";
 import UserRoute from "@/api/user/user.route";
 import CategoryRoute from "@/api/category/category.route";
 import ProductRoute from "@/api/product/product.route";
+import PaymentTypeRoute from "@/api/payment-type/payment_type.route";
+import OrderRoute from "@/api/order/order.route";
 
 class Routers {
     public router = Router();
@@ -12,7 +14,9 @@ class Routers {
         new AuthRoute(),
         new UserRoute(),
         new CategoryRoute(),
-        new ProductRoute()
+        new ProductRoute(),
+        new PaymentTypeRoute(),
+        new OrderRoute(),
     ];
 
     constructor() {

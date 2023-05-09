@@ -16,7 +16,7 @@ const authentication = expressAsyncHandler((req: IAuthRequest, res: Response, ne
     if (!bearerHeader) throw new HttpExceptionUnauthorize("Token Authorization not found");
 
     const token = bearerHeader.split(" ")[1];
-    if (!token) throw new HttpExceptionUnauthorize("Unauthorized, please login again to countinue");
+    if (!token) throw new HttpExceptionUnauthorize("Unauthorized, please login again to continue");
     const decodedToken: ITokenPayload | null = verifyToken(token);
 
     req.user = {

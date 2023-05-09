@@ -1,17 +1,14 @@
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import DB from "@/config/database";
-import Product from "./product.model";
 
-class Category extends Model {
+class Payment extends Model {
     public id: CreationOptional<string>;
     public name!: string;
-
-    public readonly created_at?: Date;
-    public readonly updated_at?: Date;
-
+    public type!: string;
+    public logo?: string;
 }
 
-Category.init({
+Payment.init({
     id: {
         type: DataTypes.UUID,
         primaryKey: true,
@@ -20,22 +17,19 @@ Category.init({
     name: {
         type: new DataTypes.STRING(),
         allowNull: false,
-    }
+    },
+    type: {
+        type: new DataTypes.STRING(),
+        allowNull: false,
+    },
+    logo: {
+        type: new DataTypes.STRING(),
+        allowNull: true,
+    },
 }, {
-    tableName: "categories",
+    tableName: "payment_types",
     sequelize: DB.sequelize,
     timestamps: true,
 });
 
-
-Category.hasMany(Product, {
-    as: "products",
-    foreignKey: "category_id",
-});
-
-Product.belongsTo(Category, {
-    as: "category",
-    foreignKey: "category_id",
-});
-
-export default Category;
+export default Payment;

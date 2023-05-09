@@ -1,7 +1,7 @@
-
 import User from "@/models/user.model";
-import { HttpExceptionBadRequest, HttpExceptionNotFound } from "@/exceptions/HttpException";
+import { HttpExceptionBadRequest, HttpExceptionNotAcceptable, HttpExceptionNotFound } from "@/exceptions/HttpException";
 import { ITokenPayload, generateToken } from "@/utils/jwt.utils";
+import { ADMIN_ROLE, CASHIER_ROLE } from "@/utils/constant.utils";
 
 class AuthService {
     public login = async (user: any): Promise<any> => {
@@ -15,10 +15,13 @@ class AuthService {
         if (!isExist) {
             throw new HttpExceptionNotFound("Email not found");
         }
+        if (isExist.role_id !== ADMIN_ROLE as string && isExist.role_id !== CASHIER_ROLE as string) {
+            throw new HttpExceptionNotAcceptable("You can't access this route, just admin or cashier");
+        }
 
-        const isPasswordMatch = await isExist?.comparePassword(password);
+        const isPasswordMatch = await isExist?.validatePassword(password);
         if (!isPasswordMatch) {
-            new HttpExceptionBadRequest("username or password is wrong");
+            throw new HttpExceptionBadRequest("Password is wrong");
         }
 
         const payload = {

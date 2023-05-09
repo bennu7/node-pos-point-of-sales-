@@ -1,6 +1,7 @@
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import DB from "@/config/database";
 import Role from "./role.model";
+import bcryptjs from "bcryptjs";
 
 class User extends Model {
     public id: CreationOptional<string>;
@@ -18,8 +19,8 @@ class User extends Model {
     // public generatePassword = async (password: string): Promise<string> => {
     //     return bcryptjs.hashSync(password, 10);
     // };
-    public comparePassword = async (password: string): Promise<boolean> => {
-        return password === this.password;
+    public validatePassword = async (password: string): Promise<boolean> => {
+        return bcryptjs.compareSync(password, this.password);
     };
 }
 
@@ -42,6 +43,10 @@ User.init({
         allowNull: true,
     },
     password: {
+        type: new DataTypes.STRING(),
+        allowNull: true,
+    },
+    created_by: {
         type: new DataTypes.STRING(),
         allowNull: true,
     },
