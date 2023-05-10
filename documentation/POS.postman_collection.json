@@ -1,0 +1,2295 @@
+{
+	"info": {
+		"_postman_id": "bb9dd471-8d07-4d0d-8869-d1c53bcae03a",
+		"name": "NODEJS POS (Product Of Sales)",
+		"description": "This application build by node js with develop by lalu ibnu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25296096"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"pm.environment.set(\"token\", jsonData.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"Password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "login for role admin or cashier"
+					},
+					"response": [
+						{
+							"name": "login admin or cashier",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"Password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "297"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"129-CkNHZKtTr2ErgPHL799JRuSHmlA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 09:10:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2E1ZWNkYTctMzViZi00MGQ3LWExMjctNTFhODcwYjI2MzYxIiwicm9sZV9pZCI6Ijc1ZDc5N2Q5LTUwYTctNDgwNS05ZjJlLThjN2IyOWMzNWE1YyIsImlhdCI6MTY4MzQ1MDY1MCwiZXhwIjoxNjgzNTM3MDUwfQ.hJErj2Y5rGs5aUXjp2cx0e6KB8Iz5i-UdM7SvbBKc4w\"\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "for authenticaton admin or cashier"
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create user, must by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"cashier\",\n    \"user_name\": \"cashier\",\n    \"email\": \"cashier@gmail.com\",\n    \"password\": \"Password123\",\n    \"confirmation_password\": \"Password123\",\n    \"role_id\": \"cc670dc1-26a7-4712-a6fa-4604f5c35a99\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/create",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"create"
+							]
+						},
+						"description": "buat akun user atau kashir. (akses admin).\n\nsecara default role nya adalah user biasa"
+					},
+					"response": [
+						{
+							"name": "create user, must by admin. default is user role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"user\",\n    \"user_name\": \"user\",\n    \"email\": \"user@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "383"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17f-nfVu2pM58sbFw+7VxXoYszivbEM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:47:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success created user\",\n    \"data\": {\n        \"id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n        \"email\": \"user@gmail.com\",\n        \"full_name\": \"user\",\n        \"password\": null,\n        \"user_name\": \"user\",\n        \"role_id\": \"1e45853f-5603-43a3-8492-e74576ff2794\",\n        \"created_by\": \"ca5ecda7-35bf-40d7-a127-51a870b26361\",\n        \"updated_at\": \"2023-05-07T19:47:00.220Z\",\n        \"created_at\": \"2023-05-07T19:47:00.220Z\",\n        \"deleted_at\": null\n    }\n}"
+						},
+						{
+							"name": "create cashier user, must by admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"cashier\",\n    \"user_name\": \"cashier\",\n    \"email\": \"cashier@gmail.com\",\n    \"password\": \"Password123\",\n    \"confirmation_password\": \"Password123\",\n    \"role_id\": \"cc670dc1-26a7-4712-a6fa-4604f5c35a99\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "450"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c2-ypjqM18PxVJoZBcq95XY8lFZLEc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:56:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success created user\",\n    \"data\": {\n        \"id\": \"a8efd39a-e022-4375-a2c8-b6b64e4a99c5\",\n        \"email\": \"cashier@gmail.com\",\n        \"full_name\": \"cashier\",\n        \"password\": \"$2a$10$GUWl0U6o1HL0JRBAWh.jY..7vHfLcxGEKqxBHfkgwdRV1iQ1fl7na\",\n        \"user_name\": \"cashier\",\n        \"role_id\": \"cc670dc1-26a7-4712-a6fa-4604f5c35a99\",\n        \"created_by\": \"ca5ecda7-35bf-40d7-a127-51a870b26361\",\n        \"updated_at\": \"2023-05-07T19:56:42.084Z\",\n        \"created_at\": \"2023-05-07T19:56:42.084Z\",\n        \"deleted_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get all data user by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "get semua data user. (akses admin)"
+					},
+					"response": [
+						{
+							"name": "get all data user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "627"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"273-EN9nSZE50fpAeLiwBESTFztaez8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:40:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get all data user\",\n    \"data\": [\n        {\n            \"id\": \"ca5ecda7-35bf-40d7-a127-51a870b26361\",\n            \"email\": \"admin@gmail.com\",\n            \"full_name\": \"ADMIN GANTENG\",\n            \"user_name\": \"admin\",\n            \"role_id\": \"75d797d9-50a7-4805-9f2e-8c7b29c35a5c\",\n            \"created_at\": \"2023-05-06T03:17:16.152Z\",\n            \"user_role\": {\n                \"id\": \"75d797d9-50a7-4805-9f2e-8c7b29c35a5c\",\n                \"name\": \"ADMIN\"\n            }\n        },\n        {\n            \"id\": \"a6e67a5f-ab72-4fc2-b55b-64be1c6f6fc6\",\n            \"email\": \"cashier@gmail.com\",\n            \"full_name\": \"cashier\",\n            \"user_name\": \"cashier\",\n            \"role_id\": \"1e45853f-5603-43a3-8492-e74576ff2794\",\n            \"created_at\": \"2023-05-07T19:38:01.361Z\",\n            \"user_role\": {\n                \"id\": \"1e45853f-5603-43a3-8492-e74576ff2794\",\n                \"name\": \"USER\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "update data user by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\":\"bennu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/update/274718ea-da65-4df9-96e2-bd8677bc32e0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"274718ea-da65-4df9-96e2-bd8677bc32e0"
+							]
+						},
+						"description": "update data user by params id user. (access admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/delete/1b81dabb-b1a8-41b3-a307-39c870124ce1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"1b81dabb-b1a8-41b3-a307-39c870124ce1"
+							]
+						},
+						"description": "delete data user. (akses admin)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "get all category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						},
+						"description": "get all categories by admin or cashier"
+					},
+					"response": [
+						{
+							"name": "get all category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/category",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "459"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1cb-7pZ7TOjKHhXkQAzWtAroT9WnENQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 23:31:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get all categories\",\n    \"data\": [\n        {\n            \"id\": \"6465c0cf-9171-4b75-898d-d82809ab0c37\",\n            \"name\": \"Makanan\"\n        },\n        {\n            \"id\": \"00bec000-0a3b-4f8d-99d8-bcf78346b672\",\n            \"name\": \"Minuman Hangat\"\n        },\n        {\n            \"id\": \"fc06df52-4af0-45a2-baed-1b06ffda2a44\",\n            \"name\": \"Minuman Dingin\"\n        },\n        {\n            \"id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\",\n            \"name\": \"Jus Buah\"\n        },\n        {\n            \"id\": \"51edfd36-96a5-443c-948f-edec31c2fa43\",\n            \"name\": \"Snack\"\n        },\n        {\n            \"id\": \"72aacb3f-f36c-4f4b-87f6-4a5c9147ff17\",\n            \"name\": \"jus buah\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "create multiple category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"names\": [\n        {\n            \"name\": \"buah-buahan\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category/add",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"add"
+							]
+						},
+						"description": "Can create single category or multiple category. Access by ADMIN"
+					},
+					"response": [
+						{
+							"name": "create a new multiple category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": [\n        {\n            \"name\": \"buah-buahan\"\n        },\n        {\n            \"name\": \"jamu\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/add",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "393"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"189-7gUcro8KmJr/7UCjy2NSmXyO2JY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 23:34:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success create categories\",\n    \"data\": [\n        {\n            \"id\": \"021e8bea-0610-4471-9966-ceb670f230e1\",\n            \"name\": \"buah-buahan\",\n            \"created_at\": \"2023-05-07T23:34:36.183Z\",\n            \"updated_at\": \"2023-05-07T23:34:36.183Z\",\n            \"deleted_at\": null\n        },\n        {\n            \"id\": \"ea34d546-a064-4b72-aa54-0ba960b3cf69\",\n            \"name\": \"jus buah\",\n            \"created_at\": \"2023-05-07T23:34:36.183Z\",\n            \"updated_at\": \"2023-05-07T23:34:36.183Z\",\n            \"deleted_at\": null\n        }\n    ]\n}"
+						},
+						{
+							"name": "create a new single category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": [\n        {\n            \"name\": \"buah-buahan\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/add",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "231"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e7-4abG+Wh/F0C6xHY9ksyh8oQ4da0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 23:35:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success create categories\",\n    \"data\": [\n        {\n            \"id\": \"eff032e7-c500-461a-a699-b9db39aa957b\",\n            \"name\": \"buah-buahan\",\n            \"created_at\": \"2023-05-07T23:35:24.194Z\",\n            \"updated_at\": \"2023-05-07T23:35:24.194Z\",\n            \"deleted_at\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "update category by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Soda\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category/update/eff032e7-c500-461a-a699-b9db39aa957b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"update",
+								"eff032e7-c500-461a-a699-b9db39aa957b"
+							]
+						},
+						"description": "Update data category using params category id. Access by ADMIN"
+					},
+					"response": [
+						{
+							"name": "update category by id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Soda\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/update/eff032e7-c500-461a-a699-b9db39aa957b",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"update",
+										"eff032e7-c500-461a-a699-b9db39aa957b"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "122"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7a-bKSQheZolF/mr3/l0lhgjOUFAc4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 23:36:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success update category\",\n    \"data\": {\n        \"id\": \"eff032e7-c500-461a-a699-b9db39aa957b\",\n        \"name\": \"Soda\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete multiple category. access admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\": [\n        \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category/deletes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"deletes"
+							]
+						},
+						"description": "Delete single or multiple category. Access ADMIN. Will delete all product if category id is match"
+					},
+					"response": [
+						{
+							"name": "delete multiple category. access admin",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ids\": [\n        \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/deletes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										"deletes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"47-DDo082xD38DUtuNz5tPGuWJdxlM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 02:16:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success delete 1 category and 2 product\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "get all data products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							]
+						},
+						"description": "get all data product, (akses admin dan kasir)"
+					},
+					"response": [
+						{
+							"name": "get all data products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "472"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d8-rXQIWQSrVc8a0G8xlbE9C7pflKU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:18:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get all products\",\n    \"data\": [\n        {\n            \"id\": \"d7fe37b4-7209-4098-9e9f-bf54e7092101\",\n            \"name\": \"Jus Melon kemasan Sachet\",\n            \"sku\": \"ABC098POP\",\n            \"stock\": 11,\n            \"price\": 15000,\n            \"image\": null,\n            \"original_image\": null,\n            \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n        },\n        {\n            \"id\": \"e1a507ab-a612-4d60-bbe1-851a1c7d9b61\",\n            \"name\": \"Snack ringan\",\n            \"sku\": \"AZNB123\",\n            \"stock\": 25,\n            \"price\": 3000,\n            \"image\": null,\n            \"original_image\": null,\n            \"category_id\": \"51edfd36-96a5-443c-948f-edec31c2fa43\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "create product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Jus naga\",\n    \"sku\": \"AXYIUY123\",\n    \"stock\": 5,\n    \"price\": 17500,\n    \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							]
+						},
+						"description": "buat data product baru. (akses admin)"
+					},
+					"response": [
+						{
+							"name": "create product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Snack ringan\",\n    \"sku\": \"AZNB123\",\n    \"stock\": 25,\n    \"price\": 3000,\n    \"category_id\": \"51edfd36-96a5-443c-948f-edec31c2fa43\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "355"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"163-DYZ5vyjd6hn1uCpsCICCJIb7mx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:17:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success create product\",\n    \"data\": {\n        \"id\": \"e1a507ab-a612-4d60-bbe1-851a1c7d9b61\",\n        \"name\": \"Snack ringan\",\n        \"sku\": \"AZNB123\",\n        \"price\": 3000,\n        \"stock\": 25,\n        \"category_id\": \"51edfd36-96a5-443c-948f-edec31c2fa43\",\n        \"image\": null,\n        \"updated_at\": \"2023-05-07T19:17:14.549Z\",\n        \"created_at\": \"2023-05-07T19:17:14.549Z\",\n        \"original_image\": null,\n        \"deleted_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\":\"ABC098POP\",\n    \"name\": \"Jus Melon kemasan Sachet\",\n    \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/product/d7fe37b4-7209-4098-9e9f-bf54e7092101",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"d7fe37b4-7209-4098-9e9f-bf54e7092101"
+							]
+						},
+						"description": "update product by params id product. (akses admin)"
+					},
+					"response": [
+						{
+							"name": "update product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sku\":\"ABC098POP\",\n    \"name\": \"Jus Melon kemasan Sachet\",\n    \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/d7fe37b4-7209-4098-9e9f-bf54e7092101",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										"d7fe37b4-7209-4098-9e9f-bf54e7092101"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "272"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"110-Yy2RcJzPNXPI+H6wbnyrTKxeLY4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 19:15:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success update product\",\n    \"data\": {\n        \"id\": \"d7fe37b4-7209-4098-9e9f-bf54e7092101\",\n        \"name\": \"Jus Melon kemasan Sachet\",\n        \"sku\": \"ABC098POP\",\n        \"stock\": 11,\n        \"price\": 15000,\n        \"image\": null,\n        \"original_image\": null,\n        \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product/d7fe37b4-7209-4098-9e9f-bf54e7092101",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"d7fe37b4-7209-4098-9e9f-bf54e7092101"
+							]
+						},
+						"description": "Get product by id . Access Admin and Cashier"
+					},
+					"response": [
+						{
+							"name": "get product by id. access admin or cashier",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/product/d7fe37b4-7209-4098-9e9f-bf54e7092101",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										"d7fe37b4-7209-4098-9e9f-bf54e7092101"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "275"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"113-y2VEd3xYFjW1NZ9bjiJK28N44V8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 May 2023 23:28:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get product by id\",\n    \"data\": {\n        \"id\": \"d7fe37b4-7209-4098-9e9f-bf54e7092101\",\n        \"name\": \"Jus Melon kemasan Sachet\",\n        \"sku\": \"ABC098POP\",\n        \"stock\": 11,\n        \"price\": 15000,\n        \"image\": null,\n        \"original_image\": null,\n        \"category_id\": \"22b527d2-a7ef-4aa4-acc7-0afb77821bd6\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "payment-type",
+			"item": [
+				{
+					"name": "create payment type by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jenius\",\n    \"type\": \"E-MONEY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payment-type",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payment-type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create payment type by admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Jenius\",\n    \"type\": \"E-MONEY\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payment-type",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payment-type"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fa-0nVERFB7EzuFMLn9Xxt/KZH/p+g\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 02:54:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success create payment\",\n    \"data\": {\n        \"id\": \"a878620f-463f-4ed2-9689-47890c40f380\",\n        \"name\": \"Jenius\",\n        \"type\": \"E-MONEY\",\n        \"logo\": null,\n        \"updated_at\": \"2023-05-08T02:54:59.415Z\",\n        \"created_at\": \"2023-05-08T02:54:59.415Z\",\n        \"deleted_at\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get all data payments by admin or cashier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payment-type",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payment-type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get all data payments by admin or cashier",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payment-type",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payment-type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1120"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"460-/Wd+06pRnpfYwiSZl/8fd2F0+jk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 03:07:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get all payment\",\n    \"data\": [\n        {\n            \"id\": \"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e\",\n            \"name\": \"Cash\",\n            \"type\": \"CASH\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"5557d395-a74d-402f-9450-0f0e6e7ac24a\",\n            \"name\": \"Debit\",\n            \"type\": \"DEBIT\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"7e6db1b8-be33-44ac-bd48-993cffc984d2\",\n            \"name\": \"Credit\",\n            \"type\": \"CREDIT\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"969d9c5c-1de2-4635-a115-729b6ea3b6a8\",\n            \"name\": \"OVO\",\n            \"type\": \"E-MONEY\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"e155a292-49ae-474f-9740-01e7e746c60d\",\n            \"name\": \"GoPay\",\n            \"type\": \"E-MONEY\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"9dd4fbfd-e49d-4d05-bbe6-a20792297b5d\",\n            \"name\": \"Dana\",\n            \"type\": \"E-MONEY\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"b0b26eff-5de4-4d0a-8502-0cbd46d80e0b\",\n            \"name\": \"LinkAja\",\n            \"type\": \"E-MONEY\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"1964b916-31ca-49bd-8690-a6dfc2074c03\",\n            \"name\": \"ShopeePay\",\n            \"type\": \"E-MONEY\",\n            \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n        },\n        {\n            \"id\": \"a878620f-463f-4ed2-9689-47890c40f380\",\n            \"name\": \"Jenius\",\n            \"type\": \"E-MONEY\",\n            \"logo\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "get payment by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payment-type/d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payment-type",
+								"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get payment by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payment-type/d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payment-type",
+										"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "181"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b5-qZFVy8MgQd3FVdaZyJRbrkjAeDo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 03:08:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get payment by id\",\n    \"data\": {\n        \"id\": \"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e\",\n        \"name\": \"Cash\",\n        \"type\": \"CASH\",\n        \"logo\": \"https://i.ibb.co/0jZQYQg/cash.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update data payment type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"E-MONEY & QRIS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payment-type/a878620f-463f-4ed2-9689-47890c40f380",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payment-type",
+								"a878620f-463f-4ed2-9689-47890c40f380"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update data payment type",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"E-MONEY & QRIS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/payment-type/a878620f-463f-4ed2-9689-47890c40f380",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payment-type",
+										"a878620f-463f-4ed2-9689-47890c40f380"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-HR9kMzSMmysQNC50wo96rmCF2eE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 03:10:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success update payment\",\n    \"data\": {\n        \"id\": \"a878620f-463f-4ed2-9689-47890c40f380\",\n        \"name\": \"Jenius\",\n        \"type\": \"E-MONEY & QRIS\",\n        \"logo\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete payment by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payment-type/a878620f-463f-4ed2-9689-47890c40f380",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payment-type",
+								"a878620f-463f-4ed2-9689-47890c40f380"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete payment by admin",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/payment-type/a878620f-463f-4ed2-9689-47890c40f380",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"payment-type",
+										"a878620f-463f-4ed2-9689-47890c40f380"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-ygIyYuxS56loXbA+3pFNIH91Ypc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 May 2023 03:11:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success delete 1 payment\"\n}"
+						}
+					]
+				}
+			],
+			"description": "for operation CRUD by admin, cashier just can view."
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "order-product",
+					"item": [
+						{
+							"name": "create a new order by admin or cashier",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n    \"product_id\": \"e1a507ab-a612-4d60-bbe1-851a1c7d9b61\",\n    \"qty\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/order-product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order-product"
+									]
+								},
+								"description": "create a new order product by admin or cashier. will auto counting all total_price order product to order"
+							},
+							"response": [
+								{
+									"name": "create a new order by admin or cashier",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"user_id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n    \"product_id\": \"59a093e6-0e75-4a1b-84a4-2668dad3d8a1\",\n    \"qty\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/order-product",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"order-product"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "341"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"155-UZLH9Iah2cbPqPFmqa/6X2vbYKg\""
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 May 2023 07:46:19 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status_code\": 201,\n    \"message\": \"Success create order product\",\n    \"data\": {\n        \"id\": \"d2594d1b-3147-4e2e-9ef0-620b219c0deb\",\n        \"order_id\": \"5db568eb-6b80-450f-9b53-b0a5778f44b4\",\n        \"product_id\": \"59a093e6-0e75-4a1b-84a4-2668dad3d8a1\",\n        \"qty\": 2,\n        \"total_price\": 35000,\n        \"updated_at\": \"2023-05-09T07:46:19.011Z\",\n        \"created_at\": \"2023-05-09T07:46:19.011Z\",\n        \"deleted_at\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "update quantity order product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"qty\": 7\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/order-product/c391623a-d466-4bcf-b588-71b60cf7f1fd",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order-product",
+										"c391623a-d466-4bcf-b588-71b60cf7f1fd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete order product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/order-product/c391623a-d466-4bcf-b588-71b60cf7f1fd",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order-product",
+										"c391623a-d466-4bcf-b588-71b60cf7f1fd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get product order by order id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/order-product/94aebb0b-c63f-4da7-a9cc-fe21923588e9",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order-product",
+										"94aebb0b-c63f-4da7-a9cc-fe21923588e9"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get product order by order id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/order-product/94aebb0b-c63f-4da7-a9cc-fe21923588e9",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"order-product",
+												"94aebb0b-c63f-4da7-a9cc-fe21923588e9"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "600"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"258-EmZVUwWX6EsUkTwOyuwYraHbf80\""
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 09 May 2023 07:02:49 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get order product by id\",\n    \"data\": [\n        {\n            \"id\": \"ad57d2cd-6e3c-4f71-8ab2-6c13feb97f47\",\n            \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n            \"product_id\": \"e1a507ab-a612-4d60-bbe1-851a1c7d9b61\",\n            \"qty\": 5,\n            \"total_price\": 15000\n        },\n        {\n            \"id\": \"d941cffd-8836-4769-953f-a64b9787425e\",\n            \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n            \"product_id\": \"d7fe37b4-7209-4098-9e9f-bf54e7092101\",\n            \"qty\": 1,\n            \"total_price\": 15000\n        },\n        {\n            \"id\": \"19aaa387-d996-4f91-8f00-b644e488ec0a\",\n            \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n            \"product_id\": \"59a093e6-0e75-4a1b-84a4-2668dad3d8a1\",\n            \"qty\": 2,\n            \"total_price\": 35000\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "get all orders by admin or cashier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get all orders by admin or cashier",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/order",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "835"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"343-wsHkLDhDjTDu3XWZUDyMcCElFUQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 May 2023 07:16:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get all orders\",\n    \"data\": [\n        {\n            \"id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n            \"user_id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n            \"payment_type_id\": null,\n            \"status\": \"BUYING\",\n            \"name\": null,\n            \"total_price\": null,\n            \"total_paid\": null,\n            \"total_return\": null,\n            \"receipt_code\": null,\n            \"order_products\": [\n                {\n                    \"id\": \"ad57d2cd-6e3c-4f71-8ab2-6c13feb97f47\",\n                    \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n                    \"product_id\": \"e1a507ab-a612-4d60-bbe1-851a1c7d9b61\",\n                    \"qty\": 5,\n                    \"total_price\": 15000\n                },\n                {\n                    \"id\": \"d941cffd-8836-4769-953f-a64b9787425e\",\n                    \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n                    \"product_id\": \"d7fe37b4-7209-4098-9e9f-bf54e7092101\",\n                    \"qty\": 1,\n                    \"total_price\": 15000\n                },\n                {\n                    \"id\": \"19aaa387-d996-4f91-8f00-b644e488ec0a\",\n                    \"order_id\": \"94aebb0b-c63f-4da7-a9cc-fe21923588e9\",\n                    \"product_id\": \"59a093e6-0e75-4a1b-84a4-2668dad3d8a1\",\n                    \"qty\": 2,\n                    \"total_price\": 35000\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "delete order by admin or cashier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/2011f0b4-3e10-4fae-96c5-60ed7392f532",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"2011f0b4-3e10-4fae-96c5-60ed7392f532"
+							]
+						},
+						"description": "this method will delete too order product if available. using params order id"
+					},
+					"response": [
+						{
+							"name": "delete order by admin or cashier. it success for delete order and order product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/order/2011f0b4-3e10-4fae-96c5-60ed7392f532",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order",
+										"2011f0b4-3e10-4fae-96c5-60ed7392f532"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4a-UIz3nV5z6aA2/FU4Hj5sZNg6iEc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 May 2023 05:54:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success delete 1 order and 1 order product\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get data order by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/66575f63-087b-472d-83f2-8fd80ea54317",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"66575f63-087b-472d-83f2-8fd80ea54317"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get data order by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/order/5db568eb-6b80-450f-9b53-b0a5778f44b4",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order",
+										"5db568eb-6b80-450f-9b53-b0a5778f44b4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-cl3WDTuXA/TuviHl5YBLQB9Jq/o\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 May 2023 07:59:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"Success get Order by id\",\n    \"data\": {\n        \"id\": \"5db568eb-6b80-450f-9b53-b0a5778f44b4\",\n        \"user_id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n        \"payment_type_id\": null,\n        \"status\": \"BUYING\",\n        \"name\": null,\n        \"total_price\": 50000,\n        \"total_paid\": null,\n        \"total_return\": null,\n        \"receipt_code\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update order for payment user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"payment_type_id\": \"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e\",\n \"total_paid\": 50000   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/f936d774-fb34-45d3-ad6f-75d7579c8756",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"f936d774-fb34-45d3-ad6f-75d7579c8756"
+							]
+						},
+						"description": "final for paying order, using params order id. Access by admin or cashier"
+					},
+					"response": [
+						{
+							"name": "success update order for payment user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"payment_type_id\": \"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e\",\n \"total_paid\": 50000   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/order/f936d774-fb34-45d3-ad6f-75d7579c8756",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"order",
+										"f936d774-fb34-45d3-ad6f-75d7579c8756"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "343"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"157-T7QpGjfUoFEbJZkrJ19iffxhuy4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 10 May 2023 05:44:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"User successfully paid for the Order\",\n    \"data\": {\n        \"id\": \"f936d774-fb34-45d3-ad6f-75d7579c8756\",\n        \"user_id\": \"274718ea-da65-4df9-96e2-bd8677bc32e0\",\n        \"payment_type_id\": \"d5992818-5a1e-40fd-8a70-1dc1b5d7ba6e\",\n        \"status\": \"PAID\",\n        \"name\": \"bennu\",\n        \"total_price\": 41500,\n        \"total_paid\": 50000,\n        \"total_return\": 8500,\n        \"receipt_code\": \"I0B2MD0U\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "For handle user to buy a product. First go to routing POST order-product"
+		}
+	]
+}
