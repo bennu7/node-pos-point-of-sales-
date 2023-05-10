@@ -15,13 +15,14 @@ or import file `POS.postman_collection.json` to postman in folder documentation
 - JWT
 
 ###  Features
-- [x] Login
+- [x] Login (Admin or Cashier)
 - [ ] Logout
-- [x] Manage user
-- [x] Manage product
-- [x] Manage category
-- [x] Manage order
-- [x] Manage order product
+- [x] Manage user (Admin)
+- [x] Manage product (Admin)
+- [x] Manage payment (Admin)
+- [x] Manage category (Admin)
+- [x] Manage order (Admin or Cashier)
+- [x] Manage order product (Admin or Cashier)
 
 ###  How to install & run
 IMPORTANT! before install dependencies or packages copy file .env.example to .env and change the value of the variable to suit your needs
