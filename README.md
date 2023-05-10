@@ -16,6 +16,7 @@ or import file `POS.postman_collection.json` to postman in folder documentation
 
 ###  Features
 - [x] Login
+- [ ] Logout
 - [x] Manage user
 - [x] Manage product
 - [x] Manage category
