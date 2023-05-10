@@ -70,6 +70,12 @@ const errorMiddleware = async (
                         status(STATUS.BAD_REQUEST).
                         json(apiResponse(STATUS.BAD_REQUEST, "BAD_REQUEST", message));
                 }
+                case "SequelizeEagerLoadingError": {
+                    const message = "invalid relation";
+                    return res.
+                        status(STATUS.BAD_REQUEST).
+                        json(apiResponse(STATUS.BAD_REQUEST, "BAD_REQUEST", message));
+                }
             }
 
         return res.status(err.code).json(apiResponse(err.code, err.status, err.message));

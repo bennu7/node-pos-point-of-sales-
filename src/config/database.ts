@@ -3,14 +3,18 @@ import config from "@config/config";
 import { Sequelize } from "sequelize";
 
 const dbConfig = config[NODE_ENV] || config["development"];
-const sequelize = new Sequelize(
-    dbConfig.database as string,
-    dbConfig.username as string,
-    dbConfig.password,
-    dbConfig,
-);
+const sequelize = new Sequelize({
+    database: dbConfig.database as string,
+    username: dbConfig.username as string,
+    password: dbConfig.password,
+    ...dbConfig,
+},);
 
-sequelize.authenticate();
+sequelize.authenticate().then(() => {
+    // console.log("\t| 🚀🚀 Database connected 🚀🚀 |");
+}).catch((err) => {
+    console.log("😡😡 error connecting :", err);
+});
 
 const DB = {
     sequelize,

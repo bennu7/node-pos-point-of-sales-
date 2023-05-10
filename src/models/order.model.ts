@@ -12,6 +12,10 @@ class Order extends Model {
     public total_paid!: number;
     public total_return!: number;
     public receipt_code!: string;
+
+    public readonly created_at?: Date;
+    public readonly updated_at?: Date;
+    public readonly deleted_at?: Date;
 }
 
 Order.init({
@@ -22,11 +26,15 @@ Order.init({
     },
     user_id: {
         type: DataTypes.UUID,
-        allowNull: true,
+        allowNull: false,
     },
     payment_type_id: {
         type: DataTypes.UUID,
         allowNull: true
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     name: {
         type: new DataTypes.STRING(),
@@ -54,6 +62,7 @@ Order.init({
     timestamps: true,
 });
 
+
 Order.belongsToMany(Product, {
     through: OrderProduct,
     as: "order_product",
@@ -64,6 +73,11 @@ Product.belongsToMany(Order, {
     through: OrderProduct,
     as: "ordered",
     foreignKey: "product_id",
+});
+
+Order.hasMany(OrderProduct, {
+    as: "order_products",
+    foreignKey: "order_id",
 });
 
 export default Order;

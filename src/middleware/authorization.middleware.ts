@@ -10,14 +10,20 @@ export interface IAuthenticationRequest extends Request {
     }
 }
 
-const authorization = (role: string) => {
+const authorization = (ROLE: any) => {
     return (req: IAuthenticationRequest, res: Response, next: NextFunction) => {
         const user = req.user;
-        if (!user) throw new HttpExceptionForbidden("sorry u not have access to this route");
 
-        if (role || req.user?.role_id === ADMIN_ROLE) return next();
+        if (!Array.isArray(ROLE)) {
+            if (user?.role_id === ROLE || user?.role_id === ADMIN_ROLE) return next();
 
-        if (role || req.user?.role_id === CASHIER_ROLE) return next();
+            if (!user || user.role_id !== ROLE) throw new HttpExceptionForbidden("sorry u not have access to this route");
+
+        } else if (Array.isArray(ROLE)) {
+            // if (!ROLE.includes(user?.role_id)) throw new HttpExceptionForbidden("sorry u not have access to this route");
+            if (!ROLE.includes(ADMIN_ROLE || CASHIER_ROLE)) throw new HttpExceptionForbidden("sorry u not have access to this route");
+        }
+        next();
     };
 };
 

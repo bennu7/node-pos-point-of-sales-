@@ -14,7 +14,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.UUID,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "users",
           key: "id",
@@ -27,6 +27,10 @@ module.exports = {
           model: "payment_types",
           key: "id",
         },
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
