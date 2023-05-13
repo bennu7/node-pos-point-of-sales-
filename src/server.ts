@@ -2,6 +2,8 @@ import { config } from "dotenv";
 config();
 import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
 const app = express();
 
 import { PORT } from "./utils/constant.utils";
@@ -14,6 +16,8 @@ const registerRoute = new Routers();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(cookieParser());
+app.use(helmet());
 app.use(registerRoute.router);
 app.use(errorMiddleware);
 app.use((req: Request, res: Response, next: NextFunction) => {

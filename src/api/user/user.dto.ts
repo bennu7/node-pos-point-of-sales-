@@ -5,7 +5,6 @@ import {
     IsNotEmpty,
     IsOptional,
     IsUUID,
-    Matches,
 } from "class-validator";
 
 export interface IUserRegister {

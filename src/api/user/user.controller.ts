@@ -12,7 +12,6 @@ class UserController {
     public register = expressAsyncHandler(async (req: IAuthRequest, res: Response) => {
         const idAdmin = req.user?.id;
         const data = req.body as IUserRegister;
-        console.log("idAdmin => ", idAdmin);
 
         const created = await this.userService.registerSvc(idAdmin, data);
 

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "./constant.utils";
+import { JWT_SECRET_KEY, JWT_SECRET_KEY_REFRESH } from "./constant.utils";
 
 export interface ITokenPayload {
     user_id: string;
@@ -13,6 +13,22 @@ export const generateToken = (payload: ITokenPayload): string => {
         payload,
         JWT_SECRET_KEY as string,
         { expiresIn: "1d" }
+    );
+};
+
+export const generateRefreshToken = (payload: ITokenPayload): string => {
+    return jwt.sign(
+        payload,
+        JWT_SECRET_KEY_REFRESH as string,
+        { expiresIn: "7d" }
+    );
+};
+
+export const setTokenExpired = (payload: ITokenPayload): string => {
+    return jwt.sign(
+        payload,
+        JWT_SECRET_KEY as string,
+        { expiresIn: "1s" }
     );
 };
 

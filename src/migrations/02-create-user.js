@@ -46,6 +46,10 @@ module.exports = {
           key: "id",
         },
       },
+      session_token: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("NOW()"),

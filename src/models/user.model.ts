@@ -11,6 +11,7 @@ class User extends Model {
     public password!: string;
     public role_id!: string;
     public created_by?: string;
+    public session_token?: string;
 
     public readonly created_at?: Date;
     public readonly updated_at?: Date;
@@ -53,6 +54,10 @@ User.init({
     role_id: {
         type: DataTypes.UUID,
         allowNull: false,
+    },
+    session_token: {
+        type: DataTypes.TEXT,
+        allowNull: true,
     }
 }, {
     tableName: "users",

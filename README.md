@@ -15,8 +15,10 @@ or import file `POS.postman_collection.json` to postman in folder documentation
 - JWT
 
 ###  Features
-- [x] Login (Admin or Cashier)
-- [ ] Logout
+- [x] Authentication
+> - [x] Login (Admin or Cashier)
+> - [x] Logout
+> - [x] Refresh token
 - [x] Manage user (Admin)
 - [x] Manage product (Admin)
 - [x] Manage payment (Admin)
