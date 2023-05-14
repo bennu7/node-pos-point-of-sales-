@@ -30,3 +30,5 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.listen(PORT, () => {
     console.log(`\t| 🚀🚀 ${NODE_ENV}: Server running on port ${PORT} 🚀🚀 |`);
 });
+
+export default app;

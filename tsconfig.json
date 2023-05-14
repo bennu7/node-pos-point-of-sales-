@@ -28,7 +28,11 @@
 		"strict": true,
 		"strictPropertyInitialization": false,
 		"skipLibCheck": true,
-		"noImplicitAny": false
+		"noImplicitAny": false,
+		"types": [
+			"node",
+			"jest"
+		]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]
