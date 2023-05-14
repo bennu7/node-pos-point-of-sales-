@@ -28,7 +28,7 @@ module.exports = {
         },
       },
     },
-    logging: false,
+    logging: true,
   },
   test: {
     username: DB_USER,
@@ -62,6 +62,7 @@ module.exports = {
     password: DB_PASSWORD,
     database: DB_NAME,
     host: DB_HOST,
+    port: DB_PORT,
     dialect: "postgres",
     operatorsAliases: 0,
     dialectOptions: {

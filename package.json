@@ -5,8 +5,10 @@
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
+    "start": "cross-env NODE_ENV=production pm2 start dist/server.js",
     "starter": "npx sequelize db:migrate && npx sequelize db:seed:all",
-    "build": "tsc --build && tsc-alias"
+    "build": "tsc --build && tsc-alias",
+    "pm2": "cross-env NODE_ENV=development pm2 start src/server.ts"
   },
   "keywords": [],
   "author": "",

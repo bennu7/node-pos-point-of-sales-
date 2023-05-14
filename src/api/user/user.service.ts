@@ -48,7 +48,7 @@ class UserService {
                     as: "user_role",
                 }
             ],
-            logging: true
+            // logging: true
         });
 
         return data;
