@@ -13,35 +13,10 @@ const config: Config.InitialOptions = {
     transform: {
         "^.+\\.(ts|tsx)$": "ts-jest"
     },
-    modulePaths: [compilerOptions.baseUrl],
-    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
+    modulePaths: [compilerOptions.baseUrl], // for modulePaths connect to /src
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths), // for jest to understand the path alias like @/utils
     verbose: true,
     automock: false,
-    // collectCoverage: true,
-    // transform: {
-    //     "^.+\\.ts$": "ts-jest",
-    // },
-    // collectCoverageFrom: [
-    //     "src/**/*.{ts,js}",
-    //     "!src/config/**/*.{ts,js}",
-    //     "!src/database/**/*.{ts,js}",
-    //     "!src/models/**/*.{ts,js}",
-    //     "!src/utils/**/*.{ts,js}",
-    //     "!src/app.ts",
-    //     "!src/server.ts",
-    //     "!**/node_modules/**",
-    // ],
-    // coverageProvider: "babel",
-    // coverageThreshold: {
-    //     global: {
-    //         branches: 100,
-    //         functions: 100,
-    //         lines: 100,
-    //         statements: 100,
-    //     }
-    // },
-    // preset: "ts-jest",
-    // testEnvironment: "node",
 };
 
 
